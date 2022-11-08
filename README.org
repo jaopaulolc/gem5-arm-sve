@@ -1,0 +1,63 @@
+* ARM SVE Simulation
+
+This repository contains the minimal setup to simulate programs compiled for ARM w/o SVE instructions.
+
+* Steps after cloning the repository
+
+** Fetch submodules
+
+#+begin_src bash
+  git submodule update --init --recursive
+#+end_src
+
+** Set environment variables
+
+Please edit the variables in =scripts/setenv.sh= to reflect where your ARM GCC toochain is installed and the cross-compiler prefix.
+
+After that, source the script:
+
+#+begin_src bash
+  source scripts/setenv.sh
+#+end_src
+
+* Building GEM5
+
+Please install the dependencies as in GEM5's [[https://www.gem5.org/documentation/general_docs/building][building]] documentation. In particular, it is *highly* recommend to install:
+
+- libprotobuf-dev
+- protobuf-compiler
+- libprotoc-dev
+- libgoogle-perftools-dev
+- libhdf5-dev
+
+After the dependencies are installed, execute:
+
+#+begin_src bash
+  ./scripts/build-gem5.sh
+#+end_src
+
+
+** Building M5
+
+With [[https://www.gem5.org/documentation/general_docs/m5ops/][M5Ops]] we can programatically define the region-of-interest (ROI) and easily dump simulation statistics.
+
+#+begin_src bash
+  ./scripts/build-m5.sh
+#+end_src
+
+
+* Testing Gem5 build & M5
+
+Build simple test application:
+
+#+begin_src bash
+  make -C test
+#+end_src
+
+Run test with Gem5:
+
+#+begin_src bash
+  ./scripts/run-binary-in-gem5.sh test/hello-world.x
+#+end_src
+
+The simulation statistics should be in =m5out/stats.txt=.
