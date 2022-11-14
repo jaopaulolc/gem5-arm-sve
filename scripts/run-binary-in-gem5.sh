@@ -5,11 +5,28 @@ source $SCRIPTS_DIR/utils.sh
 
 check_env_var GEM5_PATH
 
-[[ $# < 1 ]] && \
-  echo "usage: $0 <binary> [SVE VL (default 4)]" && exit 1
+function usage {
+    echo "usage: $0 -b <binary> [-l <SVE VL (default 4)>]"
+    echo -e "\t[-a <arguments to binary as string>]"
+    exit 1
+}
 
-binary=$1
-sve_vl=$2
+while getopts "b:a:l:" o; do
+    case "${o}" in
+        b)
+            binary=${OPTARG}
+            ;;
+        l)
+            sve_vl=${OPTARG}
+            ;;
+        a)
+            options=${OPTARG}
+            ;;
+        *)
+            usage
+            ;;
+    esac
+done
 
 [[ -z "$sve_vl" ]] && sve_vl=4
 
@@ -24,4 +41,4 @@ ${GEM5_PATH}/build/ARM/gem5.opt \
   --mem-size=1GB \
   --cacheline_size=128 \
   --param "system.cpu[:].isa[:].sve_vl_se = ${sve_vl}" \
-  --cmd $1 #--options 6000 
+  --cmd $binary --options "$options"
