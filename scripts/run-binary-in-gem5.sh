@@ -28,6 +28,8 @@ while getopts "b:a:l:" o; do
     esac
 done
 
+[[ -z "$binary" ]] && usage
+[[ ! -e $binary ]] && echo "error: binary '$binary' does not exist" && exit
 [[ -z "$sve_vl" ]] && sve_vl=4
 
 ${GEM5_PATH}/build/ARM/gem5.opt \
