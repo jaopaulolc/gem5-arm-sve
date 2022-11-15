@@ -1,7 +1,7 @@
 CC = aarch64-none-linux-gnu-gcc
 
 CPPFLAGS = -Wall -I $(shell echo ${GEM5_PATH})/include
-CFLAGS = -O3 -march=armv8.2-a+sve+sve2 \
+CFLAGS = -O3 -march=armv8.2-a+sve \
 				 --sysroot=$(shell echo ${CROSS_COMPILER_SYSROOT})
 LDFLAGS = -static -L $(shell echo ${M5_LIB_PATH}) -lm5
 
