@@ -34,8 +34,8 @@ done
 
 ${GEM5_PATH}/build/ARM/gem5.opt \
   ${GEM5_PATH}/configs/example/se.py \
-  --cpu-type MinorCPU \
-  --mem-type SimpleMemory \
+  --cpu-type O3_ARM_v7a_3 \
+  --mem-type DDR3_2133_8x8 \
   --caches --l2cache \
   --l1i_size=64kB --l1i_assoc=4 \
   --l1d_size=64kB --l1d_assoc=4 \
