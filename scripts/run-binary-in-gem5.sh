@@ -40,7 +40,7 @@ ${GEM5_PATH}/build/ARM/gem5.opt \
   --l1i_size=64kB --l1i_assoc=4 \
   --l1d_size=64kB --l1d_assoc=4 \
   --l2_size=256kB --l2_assoc=4 \
-  --mem-size=1GB \
+  --mem-size=8GB \
   --cacheline_size=128 \
   --param "system.cpu[:].isa[:].sve_vl_se = ${sve_vl}" \
   --cmd $binary --options "$options"
